@@ -276,6 +276,41 @@ namespace AimsharpWow.Modules
 	    bool Casting332084 = Aimsharp.CastingID("focus") == 332084; //Self-Cleaning Cycle
             bool Casting321764 = Aimsharp.CastingID("focus") == 321764; //Bark Armor
 	    
+	    //SoA Interupts IDs
+            bool Casting317963 = Aimsharp.CastingID("focus") == 317963; //Burden Of Knowledge
+            bool Casting327413 = Aimsharp.CastingID("focus") == 327413; //Rebellious Fist
+            bool Casting317936 = Aimsharp.CastingID("focus") == 317936; //Forsworn Doctrine
+            bool Casting317661 = Aimsharp.CastingID("focus") == 317661; //Insidious Venom
+            bool Casting328295 = Aimsharp.CastingID("focus") == 328295; //Greater Mending
+	    
+	    //MoTS Interupts IDs
+            bool Casting322767 = Aimsharp.CastingID("focus") == 322767; //Spirit Bolt
+            bool Casting324914 = Aimsharp.CastingID("focus") == 324914; //Nourish The Forest
+            bool Casting326046 = Aimsharp.CastingID("focus") == 326046; //Stimulate Resistance
+            bool Casting340544 = Aimsharp.CastingID("focus") == 340544; //Stimulate Regeneration 
+	    
+	    //NW Interupts IDs
+            bool Casting334748 = Aimsharp.CastingID("focus") == 334748; //Drain Fluids
+            bool Casting323190 = Aimsharp.CastingID("focus") == 323190; //Meat Shield
+            bool Casting320462 = Aimsharp.CastingID("focus") == 320462; //Necrotic Bolt
+            bool Casting335143 = Aimsharp.CastingID("focus") == 335143; //Bonemend
+            bool Casting324293 = Aimsharp.CastingID("focus") == 324293; //Rasping Scream
+            bool Casting338353 = Aimsharp.CastingID("focus") == 338353; //Goresplatter
+            bool Casting327130 = Aimsharp.CastingID("focus") == 327130; //Repair Flesh
+
+	    //PF Interupts IDs
+            bool Casting329239 = Aimsharp.CastingID("focus") == 329239; //CreepyCrawlers
+            bool Casting328016 = Aimsharp.CastingID("focus") == 328016; //Wonder Grow
+            bool Casting328002 = Aimsharp.CastingID("focus") == 328002; //Hurl Spores
+            bool Casting328094 = Aimsharp.CastingID("focus") == 328094; //Pestilence Bolt
+            bool Casting328475 = Aimsharp.CastingID("focus") == 328475; //Enveloping Webbing
+
+	    //SD Interupts IDs
+            bool Casting334653 = Aimsharp.CastingID("focus") == 334653; //Engorge
+            bool Casting322433 = Aimsharp.CastingID("focus") == 322433; //Stoneskin
+            bool Casting326827 = Aimsharp.CastingID("focus") == 326827; //Dread Bindings
+            bool Casting326836 = Aimsharp.CastingID("focus") == 326836; //Curse Of Suppression
+            bool Casting335305 = Aimsharp.CastingID("focus") == 335305; //Barbed Shackles
 
             //Interrupt
             bool CanInterruptEnemy = Aimsharp.IsInterruptable();
