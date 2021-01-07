@@ -262,6 +262,15 @@ namespace AimsharpWow.Modules
             bool CoralDebuffUp = Aimsharp.HasDebuff("Razor Coral");
             bool InkUp = Aimsharp.HasDebuff("Conductive Ink");
             bool DebuffFieryBrandUp = Aimsharp.HasDebuff("Fiery Brand");
+	            
+	    //TOP Interupts IDs
+            bool Casting330784 = Aimsharp.CastingID("focus") == 330784; // Necrotic Bolt
+            bool Casting330562 = Aimsharp.CastingID("focus") == 330562; // Demoralizing Shout 
+            bool Casting341977 = Aimsharp.CastingID("focus") == 341977; // Meat Shield
+            bool Casting341969 = Aimsharp.CastingID("focus") == 341969; // Withering Discharge
+            bool Casting370875 = Aimsharp.CastingID("focus") == 330875; // Spirit Frost
+            bool Casting330868 = Aimsharp.CastingID("focus") == 330868; // Necrotic Bolt Volley 
+            bool Casting342675 = Aimsharp.CastingID("focus") == 341977; // Bone Spear
 
             //Interrupt
             bool CanInterruptEnemy = Aimsharp.IsInterruptable();
