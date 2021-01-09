@@ -41,7 +41,7 @@ namespace AimsharpWow.Modules
 	    Settings.Add(new Setting("Mythic+ Important Disrupts:", false));
 	    //Settings.Add(new Setting("Disrupt Focus:", false));
 	    //Settings.Add(new Setting("Disrupt Target:", false));
-	    Settings.Add(new Setting("Disrupt at ms remaining:", 50, 1500, 200)):
+	    Settings.Add(new Setting("Disrupt at ms remaining:", 50, 1500, 200));
             Settings.Add(new Setting("Use Top Trinket:", false));
             Settings.Add(new Setting("Use Bottom Trinket:", false));
             Settings.Add(new Setting("Use DPS Potion:", false));
