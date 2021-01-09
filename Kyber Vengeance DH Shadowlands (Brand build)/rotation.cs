@@ -316,13 +316,15 @@ namespace AimsharpWow.Modules
             bool Casting335305 = Aimsharp.CastingID("focus") == 335305; //Barbed Shackles
 
             //Interrupt
-	    if (Aimsharp.CanCast("Disrupt", "focus") && CanInterruptEnemy && EnemyIsCasting && RangeToFocus <= 10 && (CastingHOA || CastingTOP)){
+            bool CanInterruptEnemy = Aimsharp.IsInterruptable("focus");
+	    bool EnemyIsCasting = Aimsharp.IsChanneling("focus") || Aimsharp.CastingRemaining("focus") > 0;
+	    int EnemyCastRemaining = Aimsharp.CastingRemaining("focus");
+            int EnemyCastingElapsed = Aimsharp.CastingElapsed("focus");
+			
+	    if (Aimsharp.CanCast("Disrupt", "focus") && CanInterruptEnemy && EnemyIsCasting && RangeToFocus <= 10 && EnemyCastRemaining < 200 && EnemyCastingElapsed > 500 && (CastingHOA || CastingTOP)){
                 Aimsharp.Cast("Disrupt");
                 return true;
 	    }
-            bool CanInterruptEnemy = Aimsharp.IsInterruptable();
-			bool EnemyIsCasting = Aimsharp.IsChanneling("target") || Aimsharp.CastingRemaining("target") > 0;
-			int EnemyCastRemaining = Aimsharp.CastingRemaining("target");
 
             //Spirit Bomb
             int DebuffSpiritBombRemains = Aimsharp.BuffRemaining("Spirit Bomb") - GCD;
