@@ -125,6 +125,7 @@ namespace AimsharpWow.Modules
             bool TargetIsEnemy = Aimsharp.TargetIsEnemy();
             bool IsChanneling = Aimsharp.IsChanneling("player");
             int EnemiesInMelee = Aimsharp.EnemiesInMelee();
+	    int RangeToFocus = Aimsharp.Range("focus");
             int RangeToTarget = Aimsharp.Range("target");
             int selfhealth = Aimsharp.Health("player");
             bool TargetIsBoss = Aimsharp.TargetIsBoss();
@@ -256,7 +257,8 @@ namespace AimsharpWow.Modules
             bool Casting326607 = Aimsharp.CastingID("focus") == 326607; //Turn To Stone 
             bool Casting323552 = Aimsharp.CastingID("focus") == 323442; //Volley Of Power
             bool Casting325876 = Aimsharp.CastingID("focus") == 325876; //Curse Of Obliteration
-            
+	    bool CastingHOA = Casting325700 || Casting326607 || Casting323552 || Casting325876;
+	    
 	    //TOP Interupts IDs
             bool Casting330784 = Aimsharp.CastingID("focus") == 330784; //Necrotic Bolt
             bool Casting330562 = Aimsharp.CastingID("focus") == 330562; //Demoralizing Shout 
@@ -265,6 +267,7 @@ namespace AimsharpWow.Modules
             bool Casting370875 = Aimsharp.CastingID("focus") == 330875; //Spirit Frost
             bool Casting330868 = Aimsharp.CastingID("focus") == 330868; //Necrotic Bolt Volley 
             bool Casting342675 = Aimsharp.CastingID("focus") == 341977; //Bone Spear
+	    bool CastingTOP = Casting330784 || Casting330562 || Casting341977 || Casting341969 || Casting370875 || Casting330868 || Casting342675;
             
 	    //DOS Interupts IDs
             bool Casting328740 = Aimsharp.CastingID("focus") == 328740; //Dark Lotus
@@ -313,6 +316,10 @@ namespace AimsharpWow.Modules
             bool Casting335305 = Aimsharp.CastingID("focus") == 335305; //Barbed Shackles
 
             //Interrupt
+	    if (Aimsharp.CanCast("Disrupt", "focus") && CanInterruptEnemy && EnemyIsCasting && RangeToFocus <= 10 && (CastingHOA || CastingTOP)){
+                Aimsharp.Cast("Disrupt");
+                return true;
+	    }
             bool CanInterruptEnemy = Aimsharp.IsInterruptable();
 			bool EnemyIsCasting = Aimsharp.IsChanneling("target") || Aimsharp.CastingRemaining("target") > 0;
 			int EnemyCastRemaining = Aimsharp.CastingRemaining("target");
