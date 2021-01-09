@@ -38,6 +38,10 @@ namespace AimsharpWow.Modules
         public override void LoadSettings()
         {
             Settings.Add(new Setting("General Settings"));
+	    Settings.Add(new Setting("Mythic+ Important Disrupts:", false));
+	    //Settings.Add(new Setting("Disrupt Focus:", false));
+	    //Settings.Add(new Setting("Disrupt Target:", false));
+	    Settings.Add(new Setting("Disrupt at ms remaining:", 50, 1500, 200)):
             Settings.Add(new Setting("Use Top Trinket:", false));
             Settings.Add(new Setting("Use Bottom Trinket:", false));
             Settings.Add(new Setting("Use DPS Potion:", false));
@@ -101,6 +105,8 @@ namespace AimsharpWow.Modules
 
             Macros.Add("sigil self", "/cast [@player] Sigil of Flame");
             Macros.Add("Elysian self","/cast [@player] Elysian Decree");
+	    
+	    Macros.Add("Focus Disrupt","/cast [@focus] Disrupt");
 
             CustomCommands.Add("SaveMeta");
             CustomCommands.Add("AOE");
@@ -278,6 +284,7 @@ namespace AimsharpWow.Modules
             bool Casting332605 = Aimsharp.CastingID("focus") == 332605; //Hex
 	    bool Casting332084 = Aimsharp.CastingID("focus") == 332084; //Self-Cleaning Cycle
             bool Casting321764 = Aimsharp.CastingID("focus") == 321764; //Bark Armor
+	    bool CastingDOS = Casting328740 || Casting328707 || Casting334076 || Casting332706 || Casting332612 || Casting332605 || Casting332084 || Casting321764;
 	    
 	    //SoA Interupts IDs
             bool Casting317963 = Aimsharp.CastingID("focus") == 317963; //Burden Of Knowledge
@@ -285,12 +292,14 @@ namespace AimsharpWow.Modules
             bool Casting317936 = Aimsharp.CastingID("focus") == 317936; //Forsworn Doctrine
             bool Casting317661 = Aimsharp.CastingID("focus") == 317661; //Insidious Venom
             bool Casting328295 = Aimsharp.CastingID("focus") == 328295; //Greater Mending
+	    bool CastingSOA = Casting317963 || Casting327413 || Casting317936 || Casting317661 || Casting328295;
 	    
 	    //MoTS Interupts IDs
             bool Casting322767 = Aimsharp.CastingID("focus") == 322767; //Spirit Bolt
             bool Casting324914 = Aimsharp.CastingID("focus") == 324914; //Nourish The Forest
             bool Casting326046 = Aimsharp.CastingID("focus") == 326046; //Stimulate Resistance
             bool Casting340544 = Aimsharp.CastingID("focus") == 340544; //Stimulate Regeneration 
+	    bool CastingMOTS = Casting322767 || Casting324914 || Casting326046 || Casting340544;
 	    
 	    //NW Interupts IDs
             bool Casting334748 = Aimsharp.CastingID("focus") == 334748; //Drain Fluids
@@ -300,6 +309,7 @@ namespace AimsharpWow.Modules
             bool Casting324293 = Aimsharp.CastingID("focus") == 324293; //Rasping Scream
             bool Casting338353 = Aimsharp.CastingID("focus") == 338353; //Goresplatter
             bool Casting327130 = Aimsharp.CastingID("focus") == 327130; //Repair Flesh
+	    bool CastingNW = Casting334748 || Casting323190 || Casting320462 || Casting335143 || Casting324293 || Casting338353 || Casting327130;
 
 	    //PF Interupts IDs
             bool Casting329239 = Aimsharp.CastingID("focus") == 329239; //CreepyCrawlers
@@ -307,6 +317,7 @@ namespace AimsharpWow.Modules
             bool Casting328002 = Aimsharp.CastingID("focus") == 328002; //Hurl Spores
             bool Casting328094 = Aimsharp.CastingID("focus") == 328094; //Pestilence Bolt
             bool Casting328475 = Aimsharp.CastingID("focus") == 328475; //Enveloping Webbing
+	    bool CastingPF = Casting329239 || Casting328016 || Casting328002 || Casting328094 || Casting328475;
 
 	    //SD Interupts IDs
             bool Casting334653 = Aimsharp.CastingID("focus") == 334653; //Engorge
@@ -314,15 +325,18 @@ namespace AimsharpWow.Modules
             bool Casting326827 = Aimsharp.CastingID("focus") == 326827; //Dread Bindings
             bool Casting326836 = Aimsharp.CastingID("focus") == 326836; //Curse Of Suppression
             bool Casting335305 = Aimsharp.CastingID("focus") == 335305; //Barbed Shackles
+	    bool CastingSD = Casting334653 || Casting322433 || Casting326827 || Casting326836 || Casting335305;
 
             //Interrupt
             bool CanInterruptEnemy = Aimsharp.IsInterruptable("focus");
 	    bool EnemyIsCasting = Aimsharp.IsChanneling("focus") || Aimsharp.CastingRemaining("focus") > 0;
 	    int EnemyCastRemaining = Aimsharp.CastingRemaining("focus");
             int EnemyCastingElapsed = Aimsharp.CastingElapsed("focus");
+	    int DisruptValue = GetSlider("Disrupt at ms remaining:");
+	    bool MythicsInterupts = GetCheckBox("Mythic+ Important Disrupts:");
 			
-	    if (Aimsharp.CanCast("Disrupt", "focus") && CanInterruptEnemy && EnemyIsCasting && RangeToFocus <= 10 && EnemyCastRemaining < 200 && EnemyCastingElapsed > 500 && (CastingHOA || CastingTOP)){
-                Aimsharp.Cast("Disrupt");
+	    if (MythicsInterupts && Aimsharp.CanCast("Disrupt", "focus") && CanInterruptEnemy && EnemyIsCasting && RangeToFocus <= 10 && EnemyCastRemaining < DisruptValue && EnemyCastingElapsed > 500 && (CastingHOA || CastingTOP || CastingDOS || CastingSOA || CastingMOTS || CastingNW || CastingPF || CastingSD )){
+                Aimsharp.Cast("Focus Disrupt");
                 return true;
 	    }
 
