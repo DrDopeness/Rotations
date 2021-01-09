@@ -100,9 +100,9 @@ namespace AimsharpWow.Modules
             }
 
 
-            Items.Add(GetString("Potion name:"));
+            Items.Add(GetDropDown("Potion name:"));
 
-            Macros.Add("DPS Pot", "/use " + GetString("Potion name:"));
+            Macros.Add("DPS Pot", "/use " + GetDropDown("Potion name:"));
             Macros.Add("TopTrinket", "/use 13");
             Macros.Add("BottomTrinket", "/use 14");
 
@@ -139,7 +139,7 @@ namespace AimsharpWow.Modules
             int selfhealth = Aimsharp.Health("player");
             bool TargetIsBoss = Aimsharp.TargetIsBoss();
             int EnemiesNearTarget = Aimsharp.EnemiesNearTarget();
-            string PotionName = GetString("Potion name:");
+            string PotionName = GetDropDown("Potion name:");
 
             //custom settings
             bool UsePotion = GetCheckBox("Use DPS Potion:");
